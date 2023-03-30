@@ -1,0 +1,14 @@
+{
+  "name": "yavor-mihaylov/waveform-generator",
+  "description": "Service which converts an audio file into a useful waveform structure.",
+  "type": "project",
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
