@@ -37,6 +37,14 @@ if ($handle) {
     echo "Error opening the file";
 }
 
+$longestMonolog = 0;
+foreach ($result as $info) {
+    $current = $info[1] - $info[0];
+    if ($current > $longestMonolog) {
+        $longestMonolog = $current;
+    }
+}
+
 echo '<pre>';
 var_dump($result);
 
