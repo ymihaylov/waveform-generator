@@ -15,6 +15,9 @@ class FfmpegFormatSilenceReverser implements SilenceToMonologueReverserInterface
     private float $currentSilenceStartAt = 0;
     private float $previousSilenceEndAt = 0;
 
+    /**
+     * @throws UnknownLineException
+     */
     public function reverseSilenceContentToMonologue(string $content): Monologue
     {
         $this->resetStateProperties();
@@ -58,6 +61,7 @@ class FfmpegFormatSilenceReverser implements SilenceToMonologueReverserInterface
 
     /**
      * @param string $line
+     * @param Monologue $monologue
      * @return void
      */
     private function processSilenceEndLine(string $line, Monologue $monologue): void

@@ -3,22 +3,22 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// TODO: to config
-$userChannelFile = '../resources/user-channel.txt';
-$customerChannelFile = '../resources/customer-channel.txt';
+$config = require __DIR__ . '/../config.php';
 
+$userChannelFile = $config['user_channel_file'];
+$customerChannelFile = $config['customer_channel_file'];
 
 $userFileHandler = new \App\Utils\FileHandler($userChannelFile);
-$userChannelDataProvider = new \App\ChannelDataProviders\FileChannelDataProvider($userFileHandler);
-
 $customerFileHandler = new \App\Utils\FileHandler($customerChannelFile);
-$customerChannelDataProvider = new \App\ChannelDataProviders\FileChannelDataProvider($customerFileHandler);
 
-$conversationRawData = new \App\Conversation\ChannelsRawData($userChannelDataProvider, $customerChannelDataProvider);
+$application = new \App\Application(
+    new \App\ChannelDataProviders\FileChannelDataProvider($userFileHandler),
+    new \App\ChannelDataProviders\FileChannelDataProvider($customerFileHandler),
+    new \App\SilenceReversers\FfmpegFormatSilenceReverser(),
+    new \App\Conversation\ConversationResultBuilder(),
+);
 
-$silenceFileParser = new \App\SilenceReversers\FfmpegFormatSilenceReverser();
-$analyzer = new \App\Conversation\ConversationAnalyzer($silenceFileParser);
-$conversationAnalysisResult = $analyzer->analyze($conversationRawData);
+$conversationAnalysisResult = $application->run();
 
 header('Content-Type: application/json');
 

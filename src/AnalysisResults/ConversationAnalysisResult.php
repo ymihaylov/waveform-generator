@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\AnalysisResults;
@@ -9,8 +8,8 @@ use App\Utils\PercentageCalculator;
 readonly class ConversationAnalysisResult
 {
     public function __construct(
-        readonly private ChannelAnalysisResult $userChannelAnalysis,
-        readonly private ChannelAnalysisResult $customerChannelAnalysis,
+        private ChannelAnalysisResult $userChannelAnalysis,
+        private ChannelAnalysisResult $customerChannelAnalysis,
     ) {}
 
     public function toArray(): array

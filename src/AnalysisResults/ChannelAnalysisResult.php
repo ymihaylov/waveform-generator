@@ -5,11 +5,11 @@ namespace App\AnalysisResults;
 
 use App\Conversation\Monologue;
 
-class ChannelAnalysisResult
+readonly class ChannelAnalysisResult
 {
-    readonly private float $longestSpeechSegmentDuration;
-    readonly private float $totalSpeechDuration;
-    readonly private array $channelData;
+    private float $longestSpeechSegmentDuration;
+    private float $totalSpeechDuration;
+    private array $channelData;
 
     /**
      * @param Monologue $monologue
