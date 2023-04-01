@@ -10,18 +10,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - MonologEntry class
 // - Error handling
 
-function calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog) {
-    $totalTalkTime = $userTotalMonolog + $customerTotalMonolog;
-
-    if ($totalTalkTime == 0) {
-        return 0;
-    }
-
-    $talkPercentage = ($userTotalMonolog / $totalTalkTime) * 100;
-
-    return round($talkPercentage, 2);
-}
-
 $silenceFileParser = new \App\SilenceFileParser();
 
 // User data and manipulation
@@ -41,7 +29,8 @@ $customerMonologueData = $customerMonologue->toArray();
 $customerLongestMonologue = $customerMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
 $customerTotalMonolog = $customerMonologue->getTotalDuration();
 
-$userTalkPercentage = calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog);
+$percentageCalculator = new \App\PercentageCalculator();
+$userTalkPercentage = $percentageCalculator->calculatePercentageOfTotal($userTotalMonolog, $customerTotalMonolog);
 
 header('Content-Type: application/json');
 
