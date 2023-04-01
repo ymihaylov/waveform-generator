@@ -5,24 +5,31 @@ namespace App;
 
 class FileHandler
 {
+    private mixed $handle;
+
+    public function __construct(string $fileName)
+    {
+        $this->handle = fopen($fileName, 'r');
+    }
     public function getFileContent(string $fileName): string
     {
         // TODO: Check if it's opened correctly
-        $handle = fopen($fileName, 'r');
-
         $result = '';
 
-        while (($line = fgets($handle)) !== false) {
+        while (($line = fgets($this->handle)) !== false) {
             $result .= $line;
         }
 
-        if ($handle === false) {
+        if ($this->handle === false) {
             echo 'Error opening';
             return '';
         }
 
-        fclose($handle);
-
         return trim($result);
+    }
+
+    public function __destruct()
+    {
+        fclose($this->handle);
     }
 }

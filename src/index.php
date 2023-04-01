@@ -10,14 +10,14 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - MonologEntry class
 // - Error handling
 
-$silenceFileParser = new \App\SilenceParser();
+$silenceFileParser = new \App\FfmpegFormatSilenceReverser();
 
 // User data and manipulation
 $userChannelFile = '../resources/user-channel.txt';
-$userFileHandler = new \App\FileHandler();
+$userFileHandler = new \App\FileHandler($userChannelFile);
 $userChannelFileContent = $userFileHandler->getFileContent($userChannelFile);
 
-$userMonologue = $silenceFileParser->reverseSilenceRawContentToMonologue($userChannelFileContent);
+$userMonologue = $silenceFileParser->reverseSilenceContentToMonologue($userChannelFileContent); // TODO: catch exception
 $userMonologData = $userMonologue->toArray();
 
 $userLongestMonologue = $userMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
@@ -25,10 +25,10 @@ $userTotalMonolog = $userMonologue->getTotalDuration();
 
 // Customer data and manipulation
 $customerChannelFile = '../resources/customer-channel.txt';
-$customerFileHandler = new \App\FileHandler();
+$customerFileHandler = new \App\FileHandler($customerChannelFile);
 $customerChannelFileContent = $customerFileHandler->getFileContent($customerChannelFile);
 
-$customerMonologue = $silenceFileParser->reverseSilenceRawContentToMonologue($customerChannelFileContent);
+$customerMonologue = $silenceFileParser->reverseSilenceContentToMonologue($customerChannelFileContent); // TODO: catch exception
 $customerMonologueData = $customerMonologue->toArray();
 
 $customerLongestMonologue = $customerMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
