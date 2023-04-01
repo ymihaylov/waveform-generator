@@ -9,11 +9,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - Monolog class
 // - MonologEntry class
 // - Error handling
-function calculateTotalMonologue(array $monologData): float {
-    return array_reduce($monologData, function ($carry, $item) {
-        return round($carry + ($item[1] - $item[0]), 3);
-    }, 0);
-}
+
 function calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog) {
     $totalTalkTime = $userTotalMonolog + $customerTotalMonolog;
 
@@ -34,7 +30,8 @@ $userMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($userCha
 $userMonologData = $userMonologue->toArray();
 
 $userLongestMonologue = $userMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
-$userTotalMonolog = calculateTotalMonologue($userMonologData);
+$userTotalMonolog = $userMonologue->getTotalDuration();
+//$userTotalMonolog = calculateTotalMonologue($userMonologData);
 
 // Customer data and manipulation
 $customerChannelFile = '../resources/customer-channel.txt';
@@ -42,7 +39,7 @@ $customerMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($cus
 $customerMonologueData = $customerMonologue->toArray();
 
 $customerLongestMonologue = $customerMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
-$customerTotalMonolog = calculateTotalMonologue($customerMonologueData);
+$customerTotalMonolog = $customerMonologue->getTotalDuration();
 
 $userTalkPercentage = calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog);
 

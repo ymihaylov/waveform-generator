@@ -48,6 +48,15 @@ class Monologue
     }
 
     /**
+     * @return float
+     */
+    public function getTotalDuration(): float {
+        return array_reduce($this->speechSegments, function (float $carry, SpeechSegment $speechSegment) {
+            return $carry + $speechSegment->getDuration();
+        }, 0);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
