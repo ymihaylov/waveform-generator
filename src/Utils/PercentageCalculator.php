@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Utils;
 
 class PercentageCalculator
 {
@@ -9,7 +9,7 @@ class PercentageCalculator
      * @param int|float $number2
      * @return float
      */
-    public function calculatePercentageOfTotal(int | float $number1, int | float $number2): float
+    public static function calculatePercentageOfTotal(int | float $number1, int | float $number2): float
     {
         $total = $number1 + $number2;
 

@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\SilenceReversers;
 
+use App\Conversation\Monologue;
+use App\Conversation\SpeechSegment;
 use App\Exceptions\SilenceReverserErrors\UnknownLineException;
 
 /** Class FfmpegFormatSilenceReverser

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\Utils;
 
 class FileHandler
 {
@@ -11,7 +11,7 @@ class FileHandler
     {
         $this->handle = fopen($fileName, 'r');
     }
-    public function getFileContent(string $fileName): string
+    public function getFileContent(): string
     {
         // TODO: Check if it's opened correctly
         $result = '';

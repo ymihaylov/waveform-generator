@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\AnalysisResults;
+
+use App\Conversation\Monologue;
 
 class ChannelAnalysisResult
 {
-    private PercentageCalculator $percentageCalculator;
-
     readonly private float $longestSpeechSegmentDuration;
     readonly private float $totalSpeechDuration;
     readonly private array $channelData;
@@ -14,9 +14,7 @@ class ChannelAnalysisResult
     /**
      * @param Monologue $monologue
      */
-    public function __construct(Monologue $monologue, PercentageCalculator $percentageCalculator) {
-        $this->percentageCalculator = $percentageCalculator;
-
+    public function __construct(Monologue $monologue) {
         $this->longestSpeechSegmentDuration = $monologue->getLongestSpeechSegment()->getDuration();
         $this->totalSpeechDuration = $monologue->getTotalDuration();
         $this->channelData = $monologue->toArray();
@@ -44,16 +42,5 @@ class ChannelAnalysisResult
     public function getChannelData(): array
     {
         return $this->channelData;
-    }
-
-    /**
-     * @param ChannelAnalysisResult $otherChannel
-     * @return float
-     */
-    public function calculateSpeechPercentage(ChannelAnalysisResult $otherChannel): float
-    {
-        return $this->percentageCalculator->calculatePercentageOfTotal(
-            $this->getTotalSpeechDuration(), $otherChannel->getTotalSpeechDuration()
-        );
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace App\SilenceReversers;
+
+use App\Conversation\Monologue;
 
 interface SilenceToMonologueReverserInterface
 {
