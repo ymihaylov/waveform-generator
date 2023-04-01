@@ -10,40 +10,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - MonologEntry class
 // - Error handling
 
-function reverseSilenceFileToMonologArray($filename) {
-    // TODO: Check if it's opened correctly.
-    $handle = fopen($filename, 'r');
-    $content = '';
-
-    $result = [];
-
-    $silenceStartAt = 0;
-    $previousEndSilence = 0;
-    if ($handle) {
-        while (($line = fgets($handle)) !== false) {
-            if (str_contains($line, 'silence_start') !== false) {
-                // Process the silence_start line
-                preg_match('/silence_start:\s*([\d.]+)/', $line, $matches);
-                $silenceStartAt = floatval($matches[1]);
-            } elseif (str_contains($line, 'silence_end')) {
-                preg_match('/silence_end:\s*([\d.]+)/', $line, $matches);
-                $silenceEndAt = floatval($matches[1]);
-
-                $result[] = [$previousEndSilence, $silenceStartAt];
-                $previousEndSilence = $silenceEndAt;
-            } else {
-                // This line doesn't contain either 'silence_start' or 'silence_end'
-                echo "Unknown line: " . $line;
-            }
-        }
-
-        fclose($handle);
-    } else {
-        echo "Error opening the file";
-    }
-
-    return $result;
-}
 function calculateLongestMonologue(array $monologData): float {
     $longestMonolog = 0;
 
@@ -74,18 +40,19 @@ function calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog) {
     return round($talkPercentage, 2);
 }
 
+$silenceFileParser = new \App\SilenceFileParser();
+
 // User data and manipulation
 $userChannelFile = '../resources/user-channel.txt';
-$userMonologData = reverseSilenceFileToMonologArray($userChannelFile);
+$userMonologData = $silenceFileParser->reverseSilenceFileToMonologueArray($userChannelFile)->toArray();
 $userLongestMonolog = calculateLongestMonologue($userMonologData);
 $userTotalMonolog = calculateTotalMonologue($userMonologData);
 
 // Customer data and manipulation
 $customerChannelFile = '../resources/customer-channel.txt';
-$customerMonologData = reverseSilenceFileToMonologArray($customerChannelFile);
+$customerMonologData = $silenceFileParser->reverseSilenceFileToMonologueArray($customerChannelFile)->toArray();
 $customerLongestMonolog = calculateLongestMonologue($customerMonologData);
 $customerTotalMonolog = calculateTotalMonologue($customerMonologData);
-
 
 $userTalkPercentage = calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog);
 
