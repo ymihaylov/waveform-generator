@@ -4,7 +4,7 @@ namespace App;
 
 class PercentageCalculator
 {
-    public function calculatePercentageOfTotal(float $number1, float $number2)
+    public function calculatePercentageOfTotal(int | float $number1, int | float $number2): float
     {
         $total = $number1 + $number2;
 

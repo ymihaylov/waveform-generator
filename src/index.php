@@ -10,20 +10,25 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - MonologEntry class
 // - Error handling
 
-$silenceFileParser = new \App\SilenceFileParser();
+$silenceFileParser = new \App\SilenceParser();
 
 // User data and manipulation
 $userChannelFile = '../resources/user-channel.txt';
-$userMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($userChannelFile);
+$userFileHandler = new \App\FileHandler();
+$userChannelFileContent = $userFileHandler->getFileContent($userChannelFile);
+
+$userMonologue = $silenceFileParser->reverseSilenceRawContentToMonologue($userChannelFileContent);
 $userMonologData = $userMonologue->toArray();
 
 $userLongestMonologue = $userMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
 $userTotalMonolog = $userMonologue->getTotalDuration();
-//$userTotalMonolog = calculateTotalMonologue($userMonologData);
 
 // Customer data and manipulation
 $customerChannelFile = '../resources/customer-channel.txt';
-$customerMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($customerChannelFile);
+$customerFileHandler = new \App\FileHandler();
+$customerChannelFileContent = $customerFileHandler->getFileContent($customerChannelFile);
+
+$customerMonologue = $silenceFileParser->reverseSilenceRawContentToMonologue($customerChannelFileContent);
 $customerMonologueData = $customerMonologue->toArray();
 
 $customerLongestMonologue = $customerMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null

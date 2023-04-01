@@ -2,34 +2,27 @@
 declare(strict_types=1);
 
 namespace App;
-class SilenceFileParser
+class SilenceParser
 {
-    public function reverseSilenceFileToMonologueArray(string $fileName): Monologue
+    public function reverseSilenceRawContentToMonologue(string $content): Monologue
     {
-        // TODO: Check if it's opened correctly.
-        $handle = $this->openFile($fileName);
+        $lines = explode(PHP_EOL, $content);
 
-        if ($handle === false) {
-            echo 'Error opening';
-            return [];
-        }
-
-        $monologue = $this->parseFile($handle);
-        fclose($handle);
-
-        return $monologue;
+        return $this->parseLines($lines);
     }
 
-    private function parseFile($handle): Monologue
+    /**
+     * @param string[] $lines
+     * @return void
+     */
+    private function parseLines(array $lines): Monologue
     {
-        $result = [];
-
         $silenceStartAt = 0;
         $previousEndSilence = 0;
 
         $monologue = new Monologue();
 
-        while (($line = fgets($handle)) !== false) {
+        foreach ($lines as $line) {
             if (str_contains($line, 'silence_start') !== false) {
                 // Process the silence_start line
                 preg_match('/silence_start:\s*([\d.]+)/', $line, $matches);
@@ -45,11 +38,7 @@ class SilenceFileParser
                 echo "Unknown line: " . $line;
             }
         }
-        return $monologue;
-    }
 
-    private function openFile(string $fileName)
-    {
-        return fopen($fileName, 'r');
+        return $monologue;
     }
 }
