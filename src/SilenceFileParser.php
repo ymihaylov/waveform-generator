@@ -38,7 +38,6 @@ class SilenceFileParser
                 preg_match('/silence_end:\s*([\d.]+)/', $line, $matches);
                 $silenceEndAt = floatval($matches[1]);
 
-//                $result[] = [$previousEndSilence, $silenceStartAt];
                 $monologue->addSpeechSegment(new SpeechSegment($previousEndSilence, $silenceStartAt));
                 $previousEndSilence = $silenceEndAt;
             } else {

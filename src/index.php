@@ -9,20 +9,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // - Monolog class
 // - MonologEntry class
 // - Error handling
-
-function calculateLongestMonologue(array $monologData): float {
-    $longestMonolog = 0;
-
-    foreach ($monologData as $monologEntry) {
-        $current = round($monologEntry[1] - $monologEntry[0], 3);
-
-        if ($current > $longestMonolog) {
-            $longestMonolog = $current;
-        }
-    }
-
-    return $longestMonolog;
-}
 function calculateTotalMonologue(array $monologData): float {
     return array_reduce($monologData, function ($carry, $item) {
         return round($carry + ($item[1] - $item[0]), 3);
@@ -44,15 +30,19 @@ $silenceFileParser = new \App\SilenceFileParser();
 
 // User data and manipulation
 $userChannelFile = '../resources/user-channel.txt';
-$userMonologData = $silenceFileParser->reverseSilenceFileToMonologueArray($userChannelFile)->toArray();
-$userLongestMonolog = calculateLongestMonologue($userMonologData);
+$userMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($userChannelFile);
+$userMonologData = $userMonologue->toArray();
+
+$userLongestMonologue = $userMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
 $userTotalMonolog = calculateTotalMonologue($userMonologData);
 
 // Customer data and manipulation
 $customerChannelFile = '../resources/customer-channel.txt';
-$customerMonologData = $silenceFileParser->reverseSilenceFileToMonologueArray($customerChannelFile)->toArray();
-$customerLongestMonolog = calculateLongestMonologue($customerMonologData);
-$customerTotalMonolog = calculateTotalMonologue($customerMonologData);
+$customerMonologue = $silenceFileParser->reverseSilenceFileToMonologueArray($customerChannelFile);
+$customerMonologueData = $customerMonologue->toArray();
+
+$customerLongestMonologue = $customerMonologue->getLongestSpeechSegment()->getDuration(); // TODO: Check is_null
+$customerTotalMonolog = calculateTotalMonologue($customerMonologueData);
 
 $userTalkPercentage = calculateTalkPercentage($userTotalMonolog, $customerTotalMonolog);
 
@@ -60,9 +50,9 @@ header('Content-Type: application/json');
 
 // Convert the array to a JSON string and echo it
 echo json_encode([
-    'longest_user_monologue' => $userLongestMonolog,
-    'longest_customer_monologue' => $customerLongestMonolog,
+    'longest_user_monologue' => $userLongestMonologue,
+    'longest_customer_monologue' => $customerLongestMonologue,
     'user_talk_percentage' => $userTalkPercentage,
     "user" => $userMonologData,
-    "customer" => $customerMonologData,
+    "customer" => $customerMonologueData,
 ]);

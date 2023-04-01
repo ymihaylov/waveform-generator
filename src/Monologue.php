@@ -9,9 +9,13 @@ class Monologue
      * @param SpeechSegment[] $speechSegments
      */
     public function __construct(
-        public array $speechSegments = [],
+        private array $speechSegments = [],
     ) {}
 
+    /**
+     * @param SpeechSegment $speechSegment
+     * @return void
+     */
     public function addSpeechSegment(SpeechSegment $speechSegment): void
     {
         $this->speechSegments[] = $speechSegment;
@@ -25,10 +29,31 @@ class Monologue
         return $this->speechSegments;
     }
 
+    /**
+     * @return ?SpeechSegment
+     */
+    public function getLongestSpeechSegment(): ?SpeechSegment
+    {
+        $longestSpeechTime = 0;
+        $longestSpeechSegment = null;
+
+        foreach ($this->speechSegments as $currentSpeechSegment) {
+            if ($currentSpeechSegment->getDuration() > $longestSpeechTime) {
+                $longestSpeechTime = $currentSpeechSegment->getDuration();
+                $longestSpeechSegment = $currentSpeechSegment;
+            }
+        }
+
+        return $longestSpeechSegment;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return array_map(function (SpeechSegment $speechSegment) {
             return $speechSegment->toArray();
-        }, $this->getSpeechSegments());
+        }, $this->speechSegments);
     }
 }

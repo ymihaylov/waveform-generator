@@ -12,7 +12,9 @@ class SpeechSegment
     public function __construct(
         private float $startTalkingAt,
         private float $endTalkingAt
-    ) {}
+    ) {
+        // TODO: Validaiton if $startTalkingAt is smaller than $endTalkingAt
+    }
 
     public function getDuration(): float
     {
@@ -60,6 +62,6 @@ class SpeechSegment
      */
     public function toArray(): array
     {
-        return [$this->getStartTalkingAt(), $this->getEndTalkingAt()];
+        return [$this->startTalkingAt, $this->endTalkingAt];
     }
 }
