@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Exceptions\SilenceParserErrors\UnknownLineException;
+use App\Exceptions\SilenceReverserErrors\UnknownLineException;
 
 /** Class FfmpegFormatSilenceReverser
 * Parses raw silence data (exported from ffmpeg) into a Monologue object.

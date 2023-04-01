@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Exceptions\SilenceParserErrors;
+namespace App\Exceptions\SilenceReverserErrors;
 
 class UnknownLineException extends \Exception
 {
