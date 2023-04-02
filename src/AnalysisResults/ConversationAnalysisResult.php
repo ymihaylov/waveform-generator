@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\AnalysisResults;
@@ -12,6 +13,9 @@ readonly class ConversationAnalysisResult
         private ChannelAnalysisResult $customerChannelAnalysis,
     ) {}
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
 

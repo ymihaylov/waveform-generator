@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Conversation;
@@ -19,13 +20,16 @@ readonly class SpeechSegment
         }
     }
 
+    /**
+     * @return float
+     */
     public function getDuration(): float
     {
         return round($this->endTalkingAt - $this->startTalkingAt, 3);
     }
 
     /**
-     * @return array
+     * @return float[]
      */
     public function toArray(): array
     {
