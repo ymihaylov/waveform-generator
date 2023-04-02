@@ -7,6 +7,9 @@ class FileContentReader
 {
     private mixed $handle;
 
+    /**
+     * @param string $fileName
+     */
     public function __construct(string $fileName)
     {
         $this->handle = fopen($fileName, 'r');
@@ -16,6 +19,9 @@ class FileContentReader
         }
     }
 
+    /**
+     * @return string
+     */
     public function getFileContent(): string
     {
         $content = '';
