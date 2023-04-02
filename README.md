@@ -2,7 +2,7 @@
 
 ## What problem solves?
 The waveform-generator project addresses two primary problems:
-1. Silence reversal - In a provided audio data containing information about silent sections, silence reversers transform the silence data into audio data, producing a continuous flow of speech segments.
+1. Silence reversal to speech - In a provided audio data containing information about silent sections, silence reversers transform the silence data into audio data, producing a continuous flow of speech segments.
 2. Waveform generation - The solution generates waveform data based on the processed audio data from step 2. This data can be used for various purposes, such as rendering a visual representation of the audio information over time or analyzing the audio content for further processing.
 
 In this specific scenario, the solution generates waveform data from two channels - a dialogue between the ```user``` and the ```customer``` and extracts analytical information from the conversation. 
@@ -24,12 +24,10 @@ An example of the solution's output could be in the following format:
   "longest_customer_monologue":22.448,
   "user_talk_percentage":30.874,
   "user":[
-    [0,3.504],[6.656,14],[19.712,20.144],[27.264,36.528],[41.728,47.28],[49.792,61.104],[65.024,79.024],
-    [ ... and many more ...]
+    [0,3.504],[6.656,14],[19.712,20.144],[27.264,36.528],[41.728,47.28],[49.792,61.104],[65.024,79.024]
   ],
   "customer":[
-    [0,1.84],[4.48,26.928],[29.184,29.36],[31.744,56.624],[58.624,66.992],[69.632,91.184],
-    [ ... and many more ...]
+    [0,1.84],[4.48,26.928],[29.184,29.36],[31.744,56.624],[58.624,66.992],[69.632,91.184]
   ]
 }
 ```
@@ -37,7 +35,8 @@ An example of the solution's output could be in the following format:
 ## Requirements
 - docker
 - docker-composer
-- _The solution doesn't require having PHP, PHPUnit, or a web server installed on your host machine._
+
+_The solution doesn't require having PHP, PHPUnit, or a web server installed on your host machine._
 
 ## How to use the solution
 1. Clone the current repo in a folder of your choice:
@@ -49,8 +48,8 @@ An example of the solution's output could be in the following format:
 
 ```docker-compose up --build```
 
-4. Open http://localhost:8080/ in the browser, or make a GET request to the same URL to see the generated data.
-5. By default, the solution works with some predefined silence data. Feel free to change it in ```resources/customer-channel.txt``` and ```resources/user-channel.txt``` if you need to.
+4. Open http://localhost:8080/ in the browser, or make a GET request from somewhere else to the same URL to see the generated data.
+5. By default, the solution works with some predefined silence data (ffmpeg format). Feel free to change it in ```resources/customer-channel.txt``` and ```resources/user-channel.txt``` if you need to.
 
 ## Testing the solution
 On running container execute the following steps:
@@ -68,6 +67,7 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 Retrieve the ID from the CONTAINER ID column. 
 
 2. Execute the ```phpunit``` command inside the container from your host machine:
+
 ```docker exec -it {{containerId}} ./vendor/bin/phpunit```
 
 Make sure to replace {{containerId}} with the actual ```containerId``` that you found in step 1.
