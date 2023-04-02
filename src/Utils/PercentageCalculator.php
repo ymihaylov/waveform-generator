@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Utils;
 
@@ -11,9 +12,9 @@ class PercentageCalculator
      */
     public static function calculatePercentageOfTotal(int | float $number1, int | float $number2): float
     {
-        $total = $number1 + $number2;
+        $total = floatval($number1 + $number2);
 
-        if ($total === 0) {
+        if ($total === 0.0) {
             return 0;
         }
 

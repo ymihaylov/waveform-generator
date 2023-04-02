@@ -15,7 +15,7 @@ readonly class ChannelAnalysisResult
      * @param Monologue $monologue
      */
     public function __construct(Monologue $monologue) {
-        $this->longestSpeechSegmentDuration = $monologue->getLongestSpeechSegment()->getDuration();
+        $this->longestSpeechSegmentDuration = $monologue->getLongestSpeechSegment()?->getDuration() ?? 0;
         $this->totalSpeechDuration = $monologue->getTotalDuration();
         $this->channelData = $monologue->toArray();
     }

@@ -6,6 +6,11 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Create a new user named "appuser"
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip
+
 # Set the working directory
 WORKDIR /var/www/html
 

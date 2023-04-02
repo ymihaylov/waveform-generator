@@ -13,8 +13,9 @@ readonly class SpeechSegment
         private float $startTalkingAt,
         private float $endTalkingAt
     ) {
+
         if ($startTalkingAt >= $endTalkingAt) {
-//            throw new \InvalidArgumentException('The $startTalkingAt value must be smaller than the $endTalkingAt value.');
+            throw new \InvalidArgumentException('The $startTalkingAt value must be smaller than the $endTalkingAt value.');
         }
     }
 

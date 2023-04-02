@@ -34,13 +34,15 @@ class FfmpegFormatSilenceReverser implements SilenceToMonologueReverserInterface
         $monologue = new Monologue();
 
         foreach ($lines as $line) {
-            if (str_contains($line, 'silence_start') !== false) {
-                $this->processSilenceStartLine($line);
-            } elseif (str_contains($line, 'silence_end')) {
-                $this->processSilenceEndLine($line, $monologue);
-            } else {
-                throw new UnknownLineException($line);
-            }
+            try {
+                if (str_contains($line, 'silence_start') !== false) {
+                    $this->processSilenceStartLine($line);
+                } elseif (str_contains($line, 'silence_end')) {
+                    $this->processSilenceEndLine($line, $monologue);
+                } else {
+                    throw new UnknownLineException($line);
+                }
+            } catch (UnknownLineException $e) {}
         }
 
         return $monologue;
