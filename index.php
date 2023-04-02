@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-$config = require __DIR__ . '/../config.php';
+$config = require __DIR__ . '/config.php';
 
 $userChannelFile = $config['user_channel_file'];
 $customerChannelFile = $config['customer_channel_file'];
