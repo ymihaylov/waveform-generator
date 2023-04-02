@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Utils;
@@ -21,8 +22,10 @@ class PercentageCalculator
         return ($number1 / $total) * 100;
     }
 
+    /**
+     * Prevent instantiation of the class
+     */
     private function __construct()
     {
-        // Prevent instantiation of the class
     }
 }

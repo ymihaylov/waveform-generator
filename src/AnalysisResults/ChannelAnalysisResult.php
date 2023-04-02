@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\AnalysisResults;
@@ -14,7 +15,8 @@ readonly class ChannelAnalysisResult
     /**
      * @param Monologue $monologue
      */
-    public function __construct(Monologue $monologue) {
+    public function __construct(Monologue $monologue)
+    {
         $this->longestSpeechSegmentDuration = $monologue->getLongestSpeechSegment()?->getDuration() ?? 0;
         $this->totalSpeechDuration = $monologue->getTotalDuration();
         $this->channelData = $monologue->toArray();

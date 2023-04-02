@@ -20,6 +20,9 @@ COPY ./composer.json /var/www/html/
 # Change the owner of the working directory to the new user
 RUN chown -R appuser:appuser /var/www/html
 
+RUN mkdir -p /home/appuser/.composer
+RUN chown appuser:appuser /home/appuser/.composer
+
 # Switch to the new user
 USER appuser
 

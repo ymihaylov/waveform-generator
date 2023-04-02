@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Conversation;
@@ -42,7 +43,8 @@ class Monologue
     /**
      * @return float
      */
-    public function getTotalDuration(): float {
+    public function getTotalDuration(): float
+    {
         return array_reduce($this->speechSegments, function (float $totalDuration, SpeechSegment $speechSegment) {
             return $totalDuration + $speechSegment->getDuration();
         }, 0);
