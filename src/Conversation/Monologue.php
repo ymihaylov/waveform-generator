@@ -51,7 +51,7 @@ class Monologue
     }
 
     /**
-     * @return array
+     * @return float[][]
      */
     public function toArray(): array
     {

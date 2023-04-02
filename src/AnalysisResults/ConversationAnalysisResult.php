@@ -13,6 +13,9 @@ readonly class ConversationAnalysisResult
         private ChannelAnalysisResult $customerChannelAnalysis,
     ) {}
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
 
