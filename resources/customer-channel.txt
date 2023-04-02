@@ -126,7 +126,7 @@
 [silencedetect @ 0x7fa7edd0c160] silence_end: 1194.88 | silence_duration: 6.352
 [silencedetect @ 0x7fa7edd0c160] silence_start: 1195.18
 [silencedetect @ 0x7fa7edd0c160] silence_end: 1197.57 | silence_duration: 2.384
-[silencedetect @ 0x7fa7edd0c160] silence_start: 1197.49
+[silencedetect @ 0x7fa7edd0c160] silence_start: 1197.59
 [silencedetect @ 0x7fa7edd0c160] silence_end: 1212.54 | silence_duration: 15.056
 [silencedetect @ 0x7fa7edd0c160] silence_start: 1216.69
 [silencedetect @ 0x7fa7edd0c160] silence_end: 1219.84 | silence_duration: 3.152

@@ -30,7 +30,7 @@ class Monologue
         $longestSpeechSegment = null;
 
         foreach ($this->speechSegments as $currentSpeechSegment) {
-            if ($currentSpeechSegment->getDuration() > $longestSpeechTime) {
+            if ($currentSpeechSegment->getDuration() >= $longestSpeechTime) {
                 $longestSpeechTime = $currentSpeechSegment->getDuration();
                 $longestSpeechSegment = $currentSpeechSegment;
             }
