@@ -42,7 +42,10 @@ class FfmpegFormatSilenceReverser implements SilenceToMonologueReverserInterface
                 } else {
                     throw new UnknownLineException($line);
                 }
-            } catch (UnknownLineException $e) {}
+            } catch (UnknownLineException $e) {
+                $className = get_class($this);
+                error_log("UnknownLineException thrown in $className: {$e->getMessage()}");
+            }
         }
 
         return $monologue;
