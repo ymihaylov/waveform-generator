@@ -19,4 +19,9 @@ class PercentageCalculator
 
         return ($number1 / $total) * 100;
     }
+
+    private function __construct()
+    {
+        // Prevent instantiation of the class
+    }
 }

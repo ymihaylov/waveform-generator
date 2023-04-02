@@ -22,14 +22,6 @@ class Monologue
     }
 
     /**
-     * @return SpeechSegment[]
-     */
-    public function getSpeechSegments(): array
-    {
-        return $this->speechSegments;
-    }
-
-    /**
      * @return ?SpeechSegment
      */
     public function getLongestSpeechSegment(): ?SpeechSegment
@@ -51,8 +43,8 @@ class Monologue
      * @return float
      */
     public function getTotalDuration(): float {
-        return array_reduce($this->speechSegments, function (float $carry, SpeechSegment $speechSegment) {
-            return $carry + $speechSegment->getDuration();
+        return array_reduce($this->speechSegments, function (float $totalDuration, SpeechSegment $speechSegment) {
+            return $totalDuration + $speechSegment->getDuration();
         }, 0);
     }
 

@@ -8,8 +8,8 @@ $config = require __DIR__ . '/../config.php';
 $userChannelFile = $config['user_channel_file'];
 $customerChannelFile = $config['customer_channel_file'];
 
-$userFileHandler = new \App\Utils\FileHandler($userChannelFile);
-$customerFileHandler = new \App\Utils\FileHandler($customerChannelFile);
+$userFileHandler = new \App\Utils\FileContentReader($userChannelFile);
+$customerFileHandler = new \App\Utils\FileContentReader($customerChannelFile);
 
 $application = new \App\Application(
     new \App\ChannelDataProviders\FileChannelDataProvider($userFileHandler),

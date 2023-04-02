@@ -15,13 +15,10 @@ class ConversationResultBuilder
      */
     public function build(Monologue $userMonologue, Monologue $customerMonologue): ConversationAnalysisResult
     {
-        // === USER
         $userChannelAnalyzedData = new ChannelAnalysisResult($userMonologue);
 
-        // === CUSTOMER
         $customerChannelAnalyzedData = new ChannelAnalysisResult($customerMonologue);
 
-        // === CONVERSATION
         return new ConversationAnalysisResult($userChannelAnalyzedData, $customerChannelAnalyzedData);
     }
 }

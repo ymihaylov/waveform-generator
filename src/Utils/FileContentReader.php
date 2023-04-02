@@ -3,29 +3,27 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-class FileHandler
+class FileContentReader
 {
     private mixed $handle;
 
     public function __construct(string $fileName)
     {
         $this->handle = fopen($fileName, 'r');
-    }
-    public function getFileContent(): string
-    {
-        // TODO: Check if it's opened correctly
-        $result = '';
-
-        while (($line = fgets($this->handle)) !== false) {
-            $result .= $line;
-        }
 
         if ($this->handle === false) {
-            echo 'Error opening';
-            return '';
+            throw new \RuntimeException("Error opening the file.");
+        }
+    }
+
+    public function getFileContent(): string
+    {
+        $content = '';
+        while (($line = fgets($this->handle)) !== false) {
+            $content .= $line;
         }
 
-        return trim($result);
+        return trim($content);
     }
 
     public function __destruct()

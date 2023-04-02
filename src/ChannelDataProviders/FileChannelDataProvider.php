@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace App\ChannelDataProviders;
 
-use App\Utils\FileHandler;
+use App\Utils\FileContentReader;
 
-class FileChannelDataProvider implements ChannelDataProviderInterface
+readonly class FileChannelDataProvider implements ChannelDataProviderInterface
 {
     public function __construct(
-        readonly private FileHandler $fileHandler
+        private FileContentReader $fileHandler
     ) {}
 
     public function getData(): string

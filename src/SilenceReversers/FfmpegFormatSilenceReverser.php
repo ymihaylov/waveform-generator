@@ -7,9 +7,6 @@ use App\Conversation\Monologue;
 use App\Conversation\SpeechSegment;
 use App\Exceptions\SilenceReverserErrors\UnknownLineException;
 
-/** Class FfmpegFormatSilenceReverser
-* Parses raw silence data (exported from ffmpeg) into a Monologue object.
-*/
 class FfmpegFormatSilenceReverser implements SilenceToMonologueReverserInterface
 {
     private float $currentSilenceStartAt = 0;

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Conversation;
 
-class SpeechSegment
+readonly class SpeechSegment
 {
     /**
      * @param float $startTalkingAt
@@ -13,48 +13,14 @@ class SpeechSegment
         private float $startTalkingAt,
         private float $endTalkingAt
     ) {
-        // TODO: Validaiton if $startTalkingAt is smaller than $endTalkingAt
+        if ($startTalkingAt >= $endTalkingAt) {
+//            throw new \InvalidArgumentException('The $startTalkingAt value must be smaller than the $endTalkingAt value.');
+        }
     }
 
     public function getDuration(): float
     {
-        return $this->endTalkingAt - $this->startTalkingAt;
-    }
-
-    /**
-     * @return float
-     */
-    public function getStartTalkingAt(): float
-    {
-        return $this->startTalkingAt;
-    }
-
-    /**
-     * @param float $startTalkingAt
-     * @return SpeechSegment
-     */
-    public function setStartTalkingAt(float $startTalkingAt): SpeechSegment
-    {
-        $this->startTalkingAt = $startTalkingAt;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getEndTalkingAt(): float
-    {
-        return $this->endTalkingAt;
-    }
-
-    /**
-     * @param float $endTalkingAt
-     * @return SpeechSegment
-     */
-    public function setEndTalkingAt(float $endTalkingAt): SpeechSegment
-    {
-        $this->endTalkingAt = $endTalkingAt;
-        return $this;
+        return round($this->endTalkingAt - $this->startTalkingAt, 3);
     }
 
     /**
