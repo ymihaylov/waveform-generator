@@ -13,7 +13,7 @@ class FileContentReader
      */
     public function __construct(string $fileName)
     {
-        $this->handle = fopen($fileName, 'r');
+        $this->handle = @fopen($fileName, 'r');
 
         if ($this->handle === false) {
             throw new \RuntimeException("Error opening the file.");

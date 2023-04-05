@@ -20,6 +20,9 @@ class PercentageCalculatorTest extends TestCase
         $this->assertEquals(round($expectedPercentage, 2), round($percentage, 2));
     }
 
+    /**
+     * @return array
+     */
     public static function percentageDataProvider(): array
     {
         return [
@@ -33,5 +36,16 @@ class PercentageCalculatorTest extends TestCase
             'number1 is zero and number2 is non-zero' => [0, 50, 0],
             'number1 is non-zero and number2 is zero' => [50, 0, 100],
         ];
+    }
+
+    /**
+     * @return void
+     */
+    public function testConstructorIsPrivate(): void
+    {
+        $reflection = new \ReflectionClass(PercentageCalculator::class);
+        $constructor = $reflection->getConstructor();
+
+        $this->assertTrue($constructor->isPrivate());
     }
 }
