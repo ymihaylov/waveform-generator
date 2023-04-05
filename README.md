@@ -71,3 +71,5 @@ Retrieve the ID from the CONTAINER ID column.
 ```docker exec -it {{containerId}} ./vendor/bin/phpunit```
 
 Make sure to replace {{containerId}} with the actual ```containerId``` that you found in step 1.
+
+This command generates a code coverage report in the ```./coverage``` folder every time it is executed. If you wish to disable this, simply add the ```--no-coverage``` argument to the command.

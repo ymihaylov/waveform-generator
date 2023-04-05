@@ -18,7 +18,6 @@ readonly class ConversationAnalysisResult
      */
     public function toArray(): array
     {
-
         $userTalkPercentage = PercentageCalculator::calculatePercentageOfTotal(
             $this->userChannelAnalysis->getTotalSpeechDuration(),
             $this->customerChannelAnalysis->getTotalSpeechDuration(),

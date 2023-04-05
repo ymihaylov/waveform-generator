@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip
 
+# Install Xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 # Set the working directory
 WORKDIR /var/www/html
 
@@ -19,6 +22,7 @@ COPY ./composer.json /var/www/html/
 
 # Change the owner of the working directory to the new user
 RUN chown -R appuser:appuser /var/www/html
+COPY ./docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN mkdir -p /home/appuser/.composer
 RUN chown appuser:appuser /home/appuser/.composer
